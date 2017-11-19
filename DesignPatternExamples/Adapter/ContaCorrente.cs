@@ -9,7 +9,7 @@ namespace DesignPatternExamples.Adapter
     public class ContaCorrente : IContaCorrente
     {
         public String nomeCorrentista;
-        List<Lancamentos> lancamentos;
+        private List<Lancamentos> _lancamentos;
 
         //LanÃ§amento Ã© um nÃºmero sequencial para ordenar todos os lanÃ§amentos dessa conta corrente
         private int idLancamento;
@@ -22,12 +22,19 @@ namespace DesignPatternExamples.Adapter
             this.nomeCorrentista = nomeCorrentista;
             this.idLancamento = 0;
             this.saldoContaCorrente = 0;
-            this.lancamentos = new List<Lancamentos>();
+            this._lancamentos = new List<Lancamentos>();
         }
+
+        public List<Lancamentos> lancamentos { get => _lancamentos; set => _lancamentos = value; }
 
         public List<Lancamentos> buscaLancamentoPorData(DateTime data)
         {
-            throw new NotImplementedException();
+            var novaLista = _lancamentos.FindAll(x => x.DDataOperacao.Equals(data)).ToList();
+
+            if (novaLista == null)
+                return null;
+
+            return (List<Lancamentos>)novaLista;
         }
 
         public Lancamentos buscaLancamentoPorID(int idLancamento)
@@ -35,12 +42,12 @@ namespace DesignPatternExamples.Adapter
             if (idLancamento > this.idLancamento)
                 return null;
 
-            return this.lancamentos.ElementAt(idLancamento);
+            return _lancamentos.ElementAt(idLancamento);
         }
 
         public int getQuantidadeLancamentos()
         {
-            return this.lancamentos.Count;
+            return _lancamentos.Count;
         }
 
         public float getSaldo()
@@ -52,7 +59,7 @@ namespace DesignPatternExamples.Adapter
         {
             idLancamento++;
             this.saldoContaCorrente += valor;
-            this.lancamentos.Add(new Lancamentos(idLancamento, descricao, valor));
+            _lancamentos.Add(new Lancamentos(idLancamento, descricao, valor));
         }
     }
 }
