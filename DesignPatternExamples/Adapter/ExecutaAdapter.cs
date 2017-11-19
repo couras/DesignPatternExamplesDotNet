@@ -15,6 +15,7 @@ namespace DesignPatternExamples.Adapter
             Console.WriteLine("--------Iniciando teste com adapter do tipo objeto-------");
             testeAdapter.iniciarObjectTypeTest();
             Console.WriteLine("---------------------------------------------------------");
+            Console.ReadLine();
         }
     }
 }

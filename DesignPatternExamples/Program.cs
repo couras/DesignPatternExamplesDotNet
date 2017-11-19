@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DesignPatternExamples.Adapter;
+using System;
 
 namespace DesignPatternExamples
 {
@@ -6,7 +7,7 @@ namespace DesignPatternExamples
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ExecutaAdapter.go();
         }
     }
 }
